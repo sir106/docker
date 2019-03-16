@@ -6,13 +6,10 @@ Docker image for volkszaehler middleware and frontend
 
 ## Installing
 
-To run this image simply pull the built version for your architecture from docker hub (https://hub.docker.com/r/andig/volkszaehler/):
+To run this image simply pull the built version for your architecture from docker hub (https://hub.docker.com/r/volkszaehler/volkszaehler):
 
-	docker pull andig/volkszaehler
-	docker pull andig/rpi-volkszaehler
-
-The first image will work on x86 architectures, the `rpi` image supports ARM platforms like the Raspberry Pi.
-
+	docker pull volkszaehler/volkszaehler
+	
 For maximum flexibility, the image does NOT contain a database itself but expects a mysql database at host `mysql` with standard volkszaehler credentials:
 
       - MYSQL_ROOT_PASSWORD=volkszaehler
@@ -31,7 +28,7 @@ If not already running, start a mysql database using the volkszaehler credential
 
 Then the actual volkszaehler image can be started:
 
-	docker run --link $DATABASE:mysql -p 8080:8080 -t andig/volkszaehler
+	docker run --link $DATABASE:mysql -p 8080:8080 -t volkszaehler/volkszaehler
 
 This exposes both frontend and middleware at port `8080`. The database schema will automatically be created or updated.
 
@@ -42,7 +39,7 @@ See section before but select the docker images for the ARM architecture:
 
 	DATABASE=$(docker run -d -e MYSQL_ROOT_PASSWORD=volkszaehler -e MYSQL_DATABASE=volkszaehler -e MYSQL_USER=vz -e MYSQL_PASSWORD=demo --name mysql hypriot/rpi-mysql)
 
-	docker run --link $DATABASE:mysql -p 8080:8080 -t andig/rpi-volkszaehler
+	docker run --link $DATABASE:mysql -p 8080:8080 -t volkszaehler/volkszaehler
 
 This setup is already available by using the pre-composed `docker-compose.yml` configuration consisting of MySQL database and volkszaehler runtime:
 
