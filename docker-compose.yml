@@ -13,7 +13,7 @@ services:
       - MYSQL_PASSWORD=demo
 
   volkszaehler:
-    image: andig/rpi-volkszaehler
+    image: volkszaehler/volkszaehler
     container_name: volkszaehler
     ports:
       - "8080:8080"
